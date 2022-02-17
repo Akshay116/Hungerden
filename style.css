@@ -21,7 +21,7 @@ body {
 nav {
     margin: auto;
     display: flex;
-    background-color: #d15959;
+    background-color: salmon;
     background-image: linear-gradient(62deg, #d15959 0%, #c49124 100%);
     justify-content: space-between;
     align-items: center;
