@@ -1,4 +1,3 @@
-console.log('tested');
 const searchBtn = document.getElementById("search-btn");
 const mealList = document.getElementById("meal");
 // const mealDetailsContent = document.querySelector('.meal-details-content');
@@ -29,11 +28,11 @@ function getMealList() {
                         </div>
                         <div class = "meal-name">
                             <h3>${meal.strMeal}</h3>
-                            <div class ="btn-group"> 
-                             <a href = "#" class = "recipe-btn">Get Recipe</a>
-                             <a href = "#" class = "recipe-btn" >Fav</a>
-
-                             </div>
+                            <div class="btns">
+                            <button type="submit" class="btnrem "><a href = "info.html?id=${meal.idMeal}" value="${meal.idMeal}" class = "recipe-btn">Get Recipe</a></button>
+                             <button type="submit" class="btnrem recipe-btn" onclick="functionToExecute(${meal.idMeal})"> Fav</button>
+                          </div>
+                </div>
                         </div>
                     </div>
                 `;
@@ -62,8 +61,14 @@ function fetchDefault() {
                 </div>
                 <div class = "meal-name">
                     <h3>${meal.strMeal}</h3>
-                    <a href = "#" class = "recipe-btn">Get Recipe</a>
-                    <a href = "#" class = "recipe-btn" >Fav</a>
+                    <div class="btns">
+                    <button type="submit" class="btnrem "><a href = "info.html?id=${meal.idMeal}" value="${meal.idMeal}" class = "recipe-btn">Get Recipe</a></button>
+                     <button 
+                      type="submit"
+                      class="btnrem recipe-btn"
+                      onclick="functionToExecute(${meal.idMeal})"
+                       > Fav</button>
+                  </div>
                 </div>
             </div>
         `;
@@ -74,26 +79,22 @@ function fetchDefault() {
 }
 fetchDefault();
 
-// get recipe of the meal
+//t oadd id to local storage
+let fav = window.localStorage.getItem("meal-favourites");
+if (!fav) {
+  window.localStorage.setItem("meal-favourites", "");
+}
+function functionToExecute(id) {
+  let items = window.localStorage.getItem("meal-favourites");
 
-// create a modal
-// function mealRecipeModal(meal){
-//     console.log(meal);
-//     meal = meal[0];
-//     let html = `
-//         <h2 class = "recipe-title">${meal.strMeal}</h2>
-//         <p class = "recipe-category">${meal.strCategory}</p>
-//         <div class = "recipe-instruct">
-//             <h3>Instructions:</h3>
-//             <p>${meal.strInstructions}</p>
-//         </div>
-//         <div class = "recipe-meal-img">
-//             <img src = "${meal.strMealThumb}" alt = "">
-//         </div>
-//         <div class = "recipe-link">
-//             <a href = "${meal.strYoutube}" target = "_blank">Watch Video</a>
-//         </div>
-//     `;
-//     mealDetailsContent.innerHTML = html;
-//     mealDetailsContent.parentElement.classList.add('showRecipe');
-// }
+  //if id already present in local storage we do not add and return
+  if (items.includes(id)) {
+    window.alert("Already added to favourites!");
+    return;
+  }
+  //appending the new id to the string
+  items = items + " " + id;
+  //updating the local storage
+  window.localStorage.setItem("meal-favourites", items);
+  window.alert("Item added to favourites");
+}
