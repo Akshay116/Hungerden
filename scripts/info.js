@@ -17,6 +17,7 @@ function fetchRecipe() {
           html += `<div class="details-conatiner">
               <div class="meals-desc">
               <h2 class="line"> ${meal.strMeal}</h2>
+              
               <p> Its a ${meal.strArea} ${meal.strCategory} Dish</p>
               </div>
 
@@ -36,8 +37,13 @@ function fetchRecipe() {
               <h4>DIRECTIONS</h4>
               
                 <p style="width:700px;height:500px ">${meal.strInstructions}e</p>
+                
   
                 <div>
+      
+                <h2 class="addfavbtn"><a class="favbtnh"onclick="functionToExecute(${meal.idMeal})" >ADD FAV</a></h2>
+               
+                
               <div class= "mealsFooter" style="width:500px;height:300px">
               <p>
               <h4>Watch Meal Video on <a href="${meal.strYoutube}" target= "blank">YOUTUBE</a></h1>
@@ -58,3 +64,22 @@ function fetchRecipe() {
 
 
 fetchRecipe();
+
+let fav = window.localStorage.getItem("meal-favourites");
+if (!fav) {
+  window.localStorage.setItem("meal-favourites", "");
+}
+function functionToExecute(id) {
+  let items = window.localStorage.getItem("meal-favourites");
+
+  //if id already present in local storage we do not add and return
+  if (items.includes(id)) {
+    window.alert("Already added to favourites!");
+    return;
+  }
+  //appending the new id to the string
+  items = items + " " + id;
+  //updating the local storage
+  window.localStorage.setItem("meal-favourites", items);
+  window.alert("Item added to favourites");
+}

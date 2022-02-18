@@ -67,4 +67,14 @@ img{
     text-decoration: none;
     cursor: pointer;
 }
+.addfavbtn:hover{
+    color:sienna;
+    transition: ease-in;
+    
+}
+.favbtnh:hover{
+    cursor: pointer;
+
+}
+
 

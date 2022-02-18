@@ -52,6 +52,10 @@ nav .container-box ul li a {
     font-weight: 600;
     color: rgb(17, 13, 13);
 }
+.nav-menu{
+   display: flex;
+ 
+}
 
 /*  */
 .btn {
@@ -69,7 +73,8 @@ nav .container-box ul li a {
 
 .title {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    
+    margin-top: 0px;
 }
 
 /*  */
@@ -87,6 +92,8 @@ nav .container-box ul li a {
 
 .meal-search {
     margin: 2rem 0;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
 .meal-search cite {
