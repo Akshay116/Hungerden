@@ -26,7 +26,7 @@ function fetchRecipe() {
               <div class="meals-desc">
               <h2 class="line"> ${meal.strMeal}</h2>
               
-              <p> Its a <big>${meal.strArea}</big> ${meal.strCategory} Dish</p>
+              <p > Its a <big>${meal.strArea}</big> ${meal.strCategory} Dish</p>
               </div>
 
               <div class="mealsIng">
@@ -44,13 +44,13 @@ function fetchRecipe() {
                <div class="mealPrep" height:100vh width:70% ">
               <h4>DIRECTIONS</h4>
               
-                <p style="width:700px;height:500px ">${meal.strInstructions}e</p>
+                <p  class="instruction" >${meal.strInstructions}</p>
                 
   
                 <div>
-      
-                <h2 class="addfavbtn"><a class="favbtnh"onclick="functionToExecute(${meal.idMeal})" >ADD FAV</a></h2>
-               
+                 <button class="button is-warning is-light "
+                  onclick="functionToExecute(${meal.idMeal})"><b>ADD FAV<b>
+                </button>
                 
               <div class= "mealsFooter" style="width:500px;height:300px">
               <p>

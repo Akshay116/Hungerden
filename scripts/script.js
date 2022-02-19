@@ -35,7 +35,7 @@ function getMealList() {
                         <div class = "meal-name">
                             <h3>${meal.strMeal}</h3>
                             <div class="btns">
-                              <button type="submit" class="btnrem "><a href = "info.html?id=${meal.idMeal}" value="${meal.idMeal}" class = "recipe-btn">Get Recipe</a></button>
+                              <button type="submit" class="btnrem"><a href = "info.html?id=${meal.idMeal}" value="${meal.idMeal}" class = "recipe-btn">Get Recipe</a></button>
                               <button type="submit" class="btnrem recipe-btn" onclick="functionToExecute(${meal.idMeal})"> Fav</button>
                            </div>
                           </div>

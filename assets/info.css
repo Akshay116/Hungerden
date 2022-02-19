@@ -22,6 +22,12 @@ img{
     border-radius: 25px;
     /* width: 50%;    */
 }
+.instruction{
+   width:700px;
+   height:500px;
+   
+  
+}
 
 .addfavbtn:hover{
     color:sienna;
@@ -32,11 +38,19 @@ img{
     cursor: pointer;
 
 }
-/* @media screen and (min-width: 600px) {
-    #details-conatiner{
 
-
+ @media screen and (max-width: 600px) {
+    .details-conatiner{
+        width: 100%;
+        
+       
+        
     }
-} */
-
+    .instruction{
+         word-wrap: break-word;
+         max-width: 100%;
+         overflow: hidden;
+    }
+}
+ 
 
