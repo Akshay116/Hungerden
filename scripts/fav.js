@@ -1,44 +1,36 @@
 console.log("on fav");
-var hasNumber = /\d/; 
 
+function checkOnline() {
+  if (!navigator.onLine) {
+    window.alert("connect to internt ");
+  }
+}
+checkOnline();
 
-
-
-
+ // RegExp \D Metacharacter
+ var hasNumber = /\d/;
 
 //fetching the favourite item ids from local storage and converting it into an array
 let item = window.localStorage.getItem("meal-favourites").split(/(\s+)/);
-function ifEmptyRedirect() {
-  let itemString = item.toString();
 
+// function to check if storage is empty 
+   function ifEmptyRedirect() {
+   let itemString = item.toString();
   let resCheck = hasNumber.test(itemString);
-  if(!resCheck){
-     window.alert("add something");
-     window.location.href = "index.html";
-    
+  if (!resCheck) {
+    window.alert("add something");
+    window.location.href = "index.html";
   }
   console.log(resCheck);
 }
- 
+
 ifEmptyRedirect();
 
-
-
-
-// if (item.length == 1) {
-//   window.alert("YOUR LIST IS EMPTY PlZ ADD NEW");
-//   window.location.href = "index.html";
-// }
-
-item.filter(function (e) {
-  return e.trim().length > 0;
-});
-// console.log(item);
 //fetching all the favourite meals from ids stored in local storage
 for (let id of item) {
   getMeal(id);
 }
-// console.log(typeof item);
+
 
 //this function fetches a meal with a specific id
 function getMeal(id) {
@@ -50,12 +42,12 @@ function getMeal(id) {
       }
     });
 }
-
+// HTML code for the individual search result/food item
+let mealList = document.getElementById("meal");
 function createFavItem(res) {
   for (res of res.meals) {
-    // HTML code for the individual search result/food item
-
-    var foodItem = `
+    
+  var foodItem = `
     <div class = "meal-item" data-id = "${res.idMeal}">
     <div class = "meal-img">
         <img src = "${res.strMealThumb}" alt = "food">
@@ -74,71 +66,50 @@ function createFavItem(res) {
     </div>
 </div>`;
     // appending the result to the root 'recipie-list' div
-    let mealList = document.getElementById("meal");
     mealList.innerHTML = foodItem + mealList.innerHTML;
   }
 }
 
-// clear all // this method will only works one DOM LARNT
-// const clearAll = document.getElementById("remove-all");
-// let changetxt = clearAll.innerText;
-// console.log(changetxt);
 
-// clearAll.addEventListener("click",clearAllFun);
-
-function clearAllFun() {
-  if (item.length !== 1) {
-    window.alert("Clearing all favs");
-    window.localStorage.clear();
-    window.location.href = "index.html";
-
-    return;
+// Remove All Favorites
+ function clearAllFun() {
+  if (window.confirm("remove all")) {
+      window.localStorage.clear();
+      window.location.href = "index.html";
+      
   }
-  // console.log("aee");
-  // console.log(item.length);  = 1 '' Reason when empty
+
   else {
     window.alert("ADD meals from Meals REDIRECTINNG");
     window.location.href = "index.html";
   }
 }
 
-//handling click event on the 'favourite-button' to unmark an item as favourite
+  // Removeing favorite-meal when  click on remove button
+   document.body.addEventListener("click", function (event) {
+    console.log("click");
+      //if the targeted div is 'favourite-button'
+      if (event.target.getAttribute("class").includes("favorite-button")) {
+        //finding the id of the current food item
+        let id = event.target.getAttribute("id");
+        //finding it's index in the item array
+        let index = item.indexOf(id);
 
-document.body.addEventListener("click", function (event) {
-  //if the targeted div is 'favourite-button'
-  console.log("click");
+        //removing item from the array
+        item.splice(index, 1);
 
-  if (event.target.getAttribute("class").includes("favorite-button")) {
-    //finding the id of the current food item
+        //creating the updated list of favourite items in a space sperated string
+        let items = "";
+        for (let i of item) {
+          items = items + " " + i;
+        }
 
-    let id = event.target.getAttribute("id");
-    //finding it's index in the item array
-    let index = item.indexOf(id);
+        //storing the updated string in local storage
+        window.localStorage.setItem("meal-favourites", items);
+        console.log("returing");
+        console.log(item);
 
-    //removing item from the array
-    item.splice(index, 1);
-
-    //creating the updated list of favourite items in a space sperated string
-    let items = "";
-    for (let i of item) {
-      items = items + " " + i;
-    }
-    
-
-    //storing the updated string in local storage
-    window.localStorage.setItem("meal-favourites", items);
-    console.log('returing');
-    console.log(item);
-    
-    
-
-    //refreshing the page
-    location.reload();
-  }
-});
- 
-
-
-
-
-   
+        //refreshing the page
+        location.reload();
+      }
+  });

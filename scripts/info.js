@@ -1,10 +1,18 @@
 console.log("on info");
 console.log(window.location.href);
 
+function checkOnline() {
+  if (!navigator.onLine) {
+    window.alert("connect to internt ");
+  }
+}
+checkOnline();
+
+// TO fetch recipe of mealId sended through URL clicked from homepage
 function fetchRecipe() {
   var url = window.location.href;
   var id = url.substring(url.lastIndexOf("=") + 1);
-  // alert(id);
+  
 
   fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((response) => response.json())
@@ -18,7 +26,7 @@ function fetchRecipe() {
               <div class="meals-desc">
               <h2 class="line"> ${meal.strMeal}</h2>
               
-              <p> Its a ${meal.strArea} ${meal.strCategory} Dish</p>
+              <p> Its a <big>${meal.strArea}</big> ${meal.strCategory} Dish</p>
               </div>
 
               <div class="mealsIng">
@@ -62,9 +70,9 @@ function fetchRecipe() {
     });
 }
 
-
 fetchRecipe();
 
+//Add to Favorites from recipe
 let fav = window.localStorage.getItem("meal-favourites");
 if (!fav) {
   window.localStorage.setItem("meal-favourites", "");
@@ -74,12 +82,17 @@ function functionToExecute(id) {
 
   //if id already present in local storage we do not add and return
   if (items.includes(id)) {
-    window.alert("Already added to favourites!");
+    swal({
+      text: " alerdy Added to favroites",
+    });
     return;
   }
-  //appending the new id to the string
   items = items + " " + id;
-  //updating the local storage
+
   window.localStorage.setItem("meal-favourites", items);
-  window.alert("Item added to favourites");
+
+  swal("Added to favourites", {
+    buttons: false,
+    timer: 1000,
+  });
 }
